@@ -1,11 +1,12 @@
 tasks = []
 
 def add_task(title):
+    """Validates and adds a new task to the list."""
     if not title or not title.strip():
-        print("Error: Task title cannot be empty!")
+        print("Error: Task title cannot be empty. Please try again.")
         return
     tasks.append({"id": len(tasks) + 1, "title": title.strip(), "completed": False})
-    print(f"Task '{title.strip()}' added!")
+    print(f"Success: Task '{title.strip()}' added!")
 
 def display_tasks():
     if not tasks:

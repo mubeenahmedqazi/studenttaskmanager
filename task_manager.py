@@ -29,8 +29,12 @@ def complete_task(task_id):
 
 def delete_task(task_id):
     global tasks
+    initial_len = len(tasks)
     tasks = [t for t in tasks if t["id"] != task_id]
-    print(f"Task {task_id} deleted.")
+    if len(tasks) < initial_len:
+        print(f"Task {task_id} deleted successfully.")
+    else:
+        print("Error: Task ID not found.")
 
 def main():
     while True:
@@ -49,8 +53,11 @@ def main():
             except ValueError:
                 print("Error: Please enter a valid numeric ID.")
         elif choice == "4":
-            tid = int(input("Enter task ID to delete: "))
-            delete_task(tid)
+            try:
+                tid = int(input("Enter task ID to delete: "))
+                delete_task(tid)
+            except ValueError:
+                print("Error: Please enter a valid numeric ID.")
         elif choice == "5":
             break
 

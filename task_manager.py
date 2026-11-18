@@ -22,8 +22,12 @@ def complete_task(task_id):
 
 def delete_task(task_id):
     global tasks
+    initial_len = len(tasks)
     tasks = [t for t in tasks if t["id"] != task_id]
-    print(f"Task {task_id} deleted.")
+    if len(tasks) < initial_len:
+        print(f"Task {task_id} deleted successfully.")
+    else:
+        print("Error: Task ID not found.")
 
 def main():
     while True:

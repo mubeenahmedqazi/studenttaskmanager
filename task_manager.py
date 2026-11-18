@@ -39,8 +39,11 @@ def main():
         elif choice == "2":
             display_tasks()
         elif choice == "3":
-            tid = int(input("Enter task ID to complete: "))
-            complete_task(tid)
+            try:
+                tid = int(input("Enter task ID to complete: "))
+                complete_task(tid)
+            except ValueError:
+                print("Error: Please enter a valid numeric ID.")
         elif choice == "4":
             tid = int(input("Enter task ID to delete: "))
             delete_task(tid)

@@ -12,10 +12,23 @@ def display_tasks():
         status = "Done" if task["completed"] else "Pending"
         print(f"{task['id']}. {task['title']} [{status}]")
 
+def complete_task(task_id):
+    for task in tasks:
+        if task["id"] == task_id:
+            task["completed"] = True
+            print(f"Task {task_id} marked as completed.")
+            return
+    print("Task not found.")
+
+def delete_task(task_id):
+    global tasks
+    tasks = [t for t in tasks if t["id"] != task_id]
+    print(f"Task {task_id} deleted.")
+
 def main():
     while True:
         print("\n--- Student Task Manager ---")
-        print("1. Add Task\n2. View Tasks\n3. Exit")
+        print("1. Add Task\n2. View Tasks\n3. Complete Task\n4. Delete Task\n5. Exit")
         choice = input("Choose an option: ")
         if choice == "1":
             title = input("Enter task title: ")
@@ -23,6 +36,12 @@ def main():
         elif choice == "2":
             display_tasks()
         elif choice == "3":
+            tid = int(input("Enter task ID to complete: "))
+            complete_task(tid)
+        elif choice == "4":
+            tid = int(input("Enter task ID to delete: "))
+            delete_task(tid)
+        elif choice == "5":
             break
 
 if __name__ == "__main__":

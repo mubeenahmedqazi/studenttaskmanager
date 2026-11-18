@@ -19,10 +19,13 @@ def display_tasks():
 def complete_task(task_id):
     for task in tasks:
         if task["id"] == task_id:
-            task["completed"] = True
-            print(f"Task {task_id} marked as completed.")
+            if task["completed"]:
+                print(f"Task {task_id} is already completed.")
+            else:
+                task["completed"] = True
+                print(f"Task {task_id} marked as completed.")
             return
-    print("Task not found.")
+    print("Error: Invalid task ID.")
 
 def delete_task(task_id):
     global tasks
@@ -40,8 +43,11 @@ def main():
         elif choice == "2":
             display_tasks()
         elif choice == "3":
-            tid = int(input("Enter task ID to complete: "))
-            complete_task(tid)
+            try:
+                tid = int(input("Enter task ID to complete: "))
+                complete_task(tid)
+            except ValueError:
+                print("Error: Please enter a valid numeric ID.")
         elif choice == "4":
             tid = int(input("Enter task ID to delete: "))
             delete_task(tid)
